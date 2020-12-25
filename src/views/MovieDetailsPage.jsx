@@ -23,8 +23,10 @@ export default function MovieDetailsPage() {
           <p>{movie.title}</p>
           <p>User Score {movie.vote_average * 10}%</p>
           <p>{movie.overview}</p>
+          <p>Genres</p>
           {movie.genres &&
             movie.genres.map(genre => <li key={genre.id}>{genre.name}</li>)}
+          <p>Additional information</p>
           <NavLink to={`${url}/cast`}>
             <p>Cast</p>
           </NavLink>
