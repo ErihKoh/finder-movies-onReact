@@ -5,8 +5,8 @@ import {
   NavLink,
   useRouteMatch,
   useHistory,
+  Route,
 } from 'react-router-dom';
-import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as serviseApi from '../services/movies-api';
 import Cast from '../views/Cast';
