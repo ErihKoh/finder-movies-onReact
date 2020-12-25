@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   useParams,
+  withRouter,
   NavLink,
   useRouteMatch,
   useHistory,
@@ -12,7 +13,7 @@ import Cast from '../views/Cast';
 import Reviews from '../views/Reviews';
 import s from './View.module.css';
 
-export default function MovieDetailsPage() {
+function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const { url, path } = useRouteMatch();
@@ -30,14 +31,20 @@ export default function MovieDetailsPage() {
       <button
         type="button"
         className={s.button}
-        onClick={() => history.push(location.state.from)}
+        onClick={() => {
+          history.push(location.state.from);
+        }}
       >
         Go to back
       </button>
       {movie && (
         <div>
           <div className={s.imageBlockDetalies}>
-            <img src={`${IMG_URL}${movie.poster_path}`} alt={movie.title} />
+            <img
+              loading="lazy"
+              src={`${IMG_URL}${movie.poster_path}`}
+              alt={movie.title}
+            />
             <div className={s.imageText}>
               <h2>{movie.title}</h2>
               <p>User Score {movie.vote_average * 10}%</p>
@@ -53,10 +60,24 @@ export default function MovieDetailsPage() {
           </div>
           <hr />
           <h3>Additional information</h3>
-          <NavLink to={`${url}/cast`}>
+          <NavLink
+            to={{
+              pathname: `${url}/cast`,
+              state: {
+                from: location,
+              },
+            }}
+          >
             <h4>Cast</h4>
           </NavLink>
-          <NavLink to={`${url}/reviews`}>
+          <NavLink
+            to={{
+              pathname: `${url}/reviews`,
+              state: {
+                from: location,
+              },
+            }}
+          >
             <h4>Reviews</h4>
           </NavLink>
           <hr />
@@ -76,3 +97,5 @@ export default function MovieDetailsPage() {
 MovieDetailsPage.protoTypes = {
   movie: PropTypes.object,
 };
+
+export default withRouter(MovieDetailsPage);
