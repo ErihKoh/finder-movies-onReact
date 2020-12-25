@@ -12,9 +12,9 @@ export function fetchTrendingMovies() {
   return fetchMovies(`${BASE_URL}/trending/all/day?api_key=${KEY}`);
 }
 
-export function fetchSearchMovies() {
+export function fetchSearchMovies(query) {
   return fetchMovies(
-    `${BASE_URL}/search/movie?api_key=${KEY}&language=en-US&query='war'&page=1&include_adult=false`,
+    `${BASE_URL}/search/movie?api_key=${KEY}&language=en-US&query=${query}&page=1&include_adult=false`,
   );
 }
 

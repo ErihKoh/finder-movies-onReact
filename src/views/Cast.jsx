@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as serviseApi from '../services/movies-api';
 import s from './View.module.css';
 import DEFAULT_IMAGE from '../images/notFound.png';
@@ -39,3 +40,7 @@ export default function Cast() {
     </>
   );
 }
+
+Cast.protoTypes = {
+  cast: PropTypes.array,
+};

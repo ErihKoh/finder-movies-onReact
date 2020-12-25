@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, NavLink, useRouteMatch } from 'react-router-dom';
 import { Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as serviseApi from '../services/movies-api';
 import Cast from '../views/Cast';
 import Reviews from '../views/Reviews';
+import s from './View.module.css';
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
@@ -19,29 +21,43 @@ export default function MovieDetailsPage() {
     <>
       {movie && (
         <div>
-          <img src={`${IMG_URL}${movie.poster_path}`} alt={movie.title} />
-          <p>{movie.title}</p>
-          <p>User Score {movie.vote_average * 10}%</p>
-          <p>{movie.overview}</p>
-          <p>Genres</p>
-          {movie.genres &&
-            movie.genres.map(genre => <li key={genre.id}>{genre.name}</li>)}
-          <p>Additional information</p>
+          <div className={s.imageBlockDetalies}>
+            <img src={`${IMG_URL}${movie.poster_path}`} alt={movie.title} />
+            <div className={s.imageText}>
+              <h2>{movie.title}</h2>
+              <p>User Score {movie.vote_average * 10}%</p>
+              <p>{movie.overview}</p>
+              <h3>Genres</h3>
+              <ul className={s.genre}>
+                {movie.genres &&
+                  movie.genres.map(genre => (
+                    <li key={genre.id}>{genre.name}</li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+          <hr />
+          <h3>Additional information</h3>
           <NavLink to={`${url}/cast`}>
-            <p>Cast</p>
+            <h4>Cast</h4>
           </NavLink>
           <NavLink to={`${url}/reviews`}>
-            <p>Reviews</p>
+            <h4>Reviews</h4>
           </NavLink>
+          <hr />
         </div>
       )}
-      <Route path="/movies/:movieId/cast">
+      <Route path={`${path}/cast`}>
         <Cast movieId={movieId} />
       </Route>
 
-      <Route path="/movies/:movieId/reviews">
-        <Reviews />
+      <Route path={`${path}/reviews`}>
+        <Reviews movieId={movieId} />
       </Route>
     </>
   );
 }
+
+MovieDetailsPage.protoTypes = {
+  movie: PropTypes.object,
+};

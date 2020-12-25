@@ -1,27 +1,37 @@
 import { useState, useEffect } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import * as serviseApi from '../services/movies-api';
+import SearchForm from '../components/SearchForm';
+import MoviesList from '../components/MoviesList';
 
 export default function MoviesPage() {
-  const { url } = useRouteMatch();
+  const [results, setResults] = useState([]);
+  const [moviesQuery, setMoviesQuery] = useState('');
 
-  const [movies, setMovies] = useState(null);
+  useEffect(() => {
+    if (!moviesQuery) {
+      return;
+    }
+    serviseApi
+      .fetchSearchMovies(moviesQuery)
+      .then(({ results }) => setResults(results));
+  }, [moviesQuery]);
 
-  //   useEffect(() => {
-  //     bookShelfAPI.fetchBooks().then(setBooks);
-  //   }, []);
+  const handleFormSubmit = query => {
+    setMoviesQuery(query);
+  };
 
   return (
     <>
-      <h2>movies</h2>
-      {/* 
-      {books &&
-        books.map(book => (
-          <ul>
-            <li key={book.id}>
-              <Link to={`${url}/${book.id}`}>{book.title}</Link>
-            </li>
-          </ul>
-        ))} */}
+      <h2>Enter query</h2>
+      <SearchForm onSubmit={handleFormSubmit} />
+      <MoviesList movies={results} />
     </>
   );
 }
+
+MoviesPage.protoTypes = {
+  results: PropTypes.array,
+  moviesQuery: PropTypes.string,
+};

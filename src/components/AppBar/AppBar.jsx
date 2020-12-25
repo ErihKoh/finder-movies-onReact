@@ -3,8 +3,13 @@ import s from './AppBar.module.css';
 
 export default function AppBar() {
   return (
-    <header className={s.header}>
-      <Navigation />
-    </header>
+    <div>
+      <header className={s.header}>
+        <Navigation />
+      </header>
+      <button type="button" className={s.button}>
+        Go to back
+      </button>
+    </div>
   );
 }

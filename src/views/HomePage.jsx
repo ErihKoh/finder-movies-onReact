@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import * as serviseApi from '../services/movies-api';
 import MoviesList from '../components/MoviesList';
 
@@ -11,3 +12,7 @@ export default function HomePage() {
 
   return <MoviesList movies={results} />;
 }
+
+HomePage.protoTypes = {
+  results: PropTypes.array,
+};
