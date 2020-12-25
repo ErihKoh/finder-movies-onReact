@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import * as serviseApi from '../services/movies-api';
 import SearchForm from '../components/SearchForm';
 import MoviesList from '../components/MoviesList';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export default function MoviesPage() {
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useLocalStorage('results', []);
   const [moviesQuery, setMoviesQuery] = useState('');
 
   useEffect(() => {
-    if (!moviesQuery) {
+    if (moviesQuery === '') {
       return;
     }
     serviseApi

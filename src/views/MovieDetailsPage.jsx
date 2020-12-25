@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useParams, NavLink, useRouteMatch } from 'react-router-dom';
+import {
+  useParams,
+  NavLink,
+  useRouteMatch,
+  useHistory,
+} from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as serviseApi from '../services/movies-api';
@@ -12,6 +17,9 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
   const { url, path } = useRouteMatch();
 
+  const { location } = useHistory();
+  const history = useHistory();
+
   const IMG_URL = 'https://image.tmdb.org/t/p/w1280';
 
   useEffect(() => {
@@ -19,6 +27,13 @@ export default function MovieDetailsPage() {
   }, [movieId]);
   return (
     <>
+      <button
+        type="button"
+        className={s.button}
+        onClick={() => history.push(location.state.from)}
+      >
+        Go to back
+      </button>
       {movie && (
         <div>
           <div className={s.imageBlockDetalies}>
