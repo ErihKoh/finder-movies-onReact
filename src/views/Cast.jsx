@@ -7,11 +7,11 @@ export default function Cast() {
   //   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    serviseApi.fetchCastsMovies(movieId).then();
-  }, [movieId]);
+    serviseApi.fetchCastMovies(movieId).then(console.log);
+  }, []);
   return (
     <>
-      <h2>Cast</h2>
+      <h2>Cast{movieId}</h2>
     </>
   );
 }

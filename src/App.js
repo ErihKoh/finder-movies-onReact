@@ -5,7 +5,7 @@ import Container from './components/Container';
 import HomePage from './views/HomePage';
 import MoviesPage from './views/MoviesPage';
 import MovieDetailsPage from './views/MovieDetailsPage';
-// import NotFoundView from './views/NotFoundView';
+import NotFoundView from './views/NotFoundView';
 
 export default function App() {
   return (
@@ -15,15 +15,15 @@ export default function App() {
         <Route path="/" exact>
           <HomePage />
         </Route>
-        <Route path="/movies">
+        <Route path="/movies" exact>
           <MoviesPage />
         </Route>
-        <Route path="/:movieId">
+        <Route path="/movies/:movieId">
           <MovieDetailsPage />
         </Route>
-        {/* <Route>
+        <Route>
           <NotFoundView />
-        </Route>   */}
+        </Route>
       </Switch>
     </Container>
   );

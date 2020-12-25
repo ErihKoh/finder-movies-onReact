@@ -8,10 +8,10 @@ export default function Review() {
 
   useEffect(() => {
     serviseApi.fetchReviewsMovies(movieId).then(console.log);
-  }, [movieId]);
+  }, []);
   return (
     <>
-      <h2>Review</h2>
+      <h2>Review{movieId}</h2>
     </>
   );
 }

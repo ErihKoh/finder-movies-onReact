@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams, NavLink, useRouteMatch } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import * as serviseApi from '../services/movies-api';
-import Cats from '../views/Cast';
+import Cast from '../views/Cast';
 import Reviews from '../views/Reviews';
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const { url, path } = useRouteMatch();
 
   const IMG_URL = 'https://image.tmdb.org/t/p/w1280';
 
@@ -24,19 +25,19 @@ export default function MovieDetailsPage() {
           <p>{movie.overview}</p>
           {movie.genres &&
             movie.genres.map(genre => <li key={genre.id}>{genre.name}</li>)}
-          <NavLink to="">
-            <p>Casts</p>
+          <NavLink to={`${url}/cast`}>
+            <p>Cast</p>
           </NavLink>
-          <NavLink to="">
+          <NavLink to={`${url}/reviews`}>
             <p>Reviews</p>
           </NavLink>
         </div>
       )}
-      <Route path="">
-        <Cats />
+      <Route path="/movies/:movieId/cast">
+        <Cast movieId={movieId} />
       </Route>
 
-      <Route path="">
+      <Route path="/movies/:movieId/reviews">
         <Reviews />
       </Route>
     </>
