@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import * as serviseApi from '../services/movies-api';
 import SearchForm from '../components/SearchForm';
 import MoviesList from '../components/MoviesList';
-import useLocalStorage from '../hooks/useLocalStorage';
+import UseSessionStorage from '../hooks/useSessionStorage';
 
 export default function MoviesPage() {
-  const [results, setResults] = useLocalStorage('results', []);
+  const [results, setResults] = UseSessionStorage('results', []);
   const [moviesQuery, setMoviesQuery] = useState('');
 
   useEffect(() => {
