@@ -14,8 +14,8 @@ import Reviews from '../views/Reviews';
 import s from './View.module.css';
 
 function MovieDetailsPage() {
-  const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const { movieId } = useParams();
   const { url, path } = useRouteMatch();
 
   const { location } = useHistory();
