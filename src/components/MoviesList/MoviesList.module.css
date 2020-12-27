@@ -1,6 +1,6 @@
 img {
   display: block;
-  width: 300px;
+  width: 297px;
   height: auto;
 }
 
@@ -11,6 +11,7 @@ img {
 }
 
 .moviesItem {
+  max-width: 300px;
   margin: 15px;
   cursor: pointer;
   border: 2px solid grey;

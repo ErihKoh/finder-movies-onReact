@@ -1,6 +1,5 @@
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import s from './MoviesList.module.css';
 
 function MoviesList({ movies, location }) {

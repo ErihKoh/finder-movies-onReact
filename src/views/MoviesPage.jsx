@@ -16,7 +16,7 @@ export default function MoviesPage() {
     serviseApi
       .fetchSearchMovies(moviesQuery)
       .then(({ results }) => setResults(results));
-  }, [moviesQuery]);
+  }, [moviesQuery, setResults]);
 
   const handleFormSubmit = query => {
     setMoviesQuery(query);

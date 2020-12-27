@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
   useParams,
-  withRouter,
   NavLink,
   useRouteMatch,
   useHistory,
@@ -98,4 +97,4 @@ MovieDetailsPage.protoTypes = {
   movie: PropTypes.object,
 };
 
-export default withRouter(MovieDetailsPage);
+export default MovieDetailsPage;
