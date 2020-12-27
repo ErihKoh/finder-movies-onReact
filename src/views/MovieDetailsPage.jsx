@@ -19,21 +19,18 @@ function MovieDetailsPage() {
 
   const { location } = useHistory();
   const history = useHistory();
-
   const IMG_URL = 'https://image.tmdb.org/t/p/w1280';
+
+  const handleGoBack = () => {
+    return history.push(location.state?.from || '/');
+  };
 
   useEffect(() => {
     serviseApi.fetchDetailsMovies(movieId).then(setMovie);
   }, [movieId]);
   return (
     <>
-      <button
-        type="button"
-        className={s.button}
-        onClick={() => {
-          history.push(location.state.from);
-        }}
-      >
+      <button type="button" className={s.button} onClick={handleGoBack}>
         Go to back
       </button>
       {movie && (
