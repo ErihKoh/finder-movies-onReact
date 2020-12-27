@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   useParams,
+  useLocation,
   NavLink,
   useRouteMatch,
   useHistory,
@@ -17,7 +18,7 @@ function MovieDetailsPage() {
   const { movieId } = useParams();
   const { url, path } = useRouteMatch();
 
-  const { location } = useHistory();
+  const location = useLocation();
   const history = useHistory();
   const IMG_URL = 'https://image.tmdb.org/t/p/w1280';
 
