@@ -23,11 +23,18 @@ function MovieDetailsPage() {
   const IMG_URL = 'https://image.tmdb.org/t/p/w1280';
 
   const handleGoBack = () => {
-    return history.push(location.state?.from || '/');
+    if (!location.state) {
+      history.push('/');
+      return;
+    }
+    history.push({ ...location.state.from });
   };
 
   useEffect(() => {
-    serviseApi.fetchDetailsMovies(movieId).then(setMovie);
+    serviseApi
+      .fetchDetailsMovies(movieId)
+      .then(setMovie)
+      .catch(error => console.log(error));
   }, [movieId]);
   return (
     <>
@@ -60,19 +67,15 @@ function MovieDetailsPage() {
           <NavLink
             to={{
               pathname: `${url}/cast`,
-              state: {
-                from: location,
-              },
+              state: { from: location.state ? location.state.from : '/' },
             }}
           >
             <h4>Cast</h4>
           </NavLink>
           <NavLink
             to={{
-              pathname: `${url}/reviews`,
-              state: {
-                from: location,
-              },
+              pathname: `${url}/cast`,
+              state: { from: location.state ? location.state.from : '/' },
             }}
           >
             <h4>Reviews</h4>

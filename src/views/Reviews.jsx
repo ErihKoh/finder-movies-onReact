@@ -11,8 +11,9 @@ export default function Review() {
   useEffect(() => {
     serviseApi
       .fetchReviewsMovies(movieId)
-      .then(({ results }) => setReview(results));
-  }, []);
+      .then(({ results }) => setReview(results))
+      .catch(error => console.log(error));
+  }, [movieId]);
   return (
     <>
       <h2>Reviews</h2>

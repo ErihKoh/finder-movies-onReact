@@ -11,8 +11,11 @@ export default function Cast() {
   const IMG_URL = 'https://image.tmdb.org/t/p/w1280';
 
   useEffect(() => {
-    serviseApi.fetchCastMovies(movieId).then(({ cast }) => setCast(cast));
-  }, []);
+    serviseApi
+      .fetchCastMovies(movieId)
+      .then(({ cast }) => setCast(cast))
+      .catch(error => console.log(error));
+  }, [movieId]);
   return (
     <>
       <h2>Cast</h2>

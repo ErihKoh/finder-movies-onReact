@@ -7,7 +7,10 @@ export default function HomePage() {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    serviseApi.fetchTrendingMovies().then(({ results }) => setResults(results));
+    serviseApi
+      .fetchTrendingMovies()
+      .then(({ results }) => setResults(results))
+      .catch(error => console.log(error));
   }, []);
 
   return <MoviesList movies={results} />;
