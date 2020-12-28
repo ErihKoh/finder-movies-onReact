@@ -20,6 +20,15 @@ export default function MoviesPage() {
   const page = new URLSearchParams(location.search).get('page') ?? 1;
 
   useEffect(() => {
+    if (location.search === '') {
+      return;
+    }
+
+    const newSearch = new URLSearchParams(location.search).get('query');
+    setMoviesQuery(newSearch, page);
+  }, [location.search, page]);
+
+  useEffect(() => {
     if (moviesQuery === '') {
       return;
     }
@@ -37,7 +46,7 @@ export default function MoviesPage() {
   };
 
   const onHandlePage = (event, page) => {
-    history.push({ ...location, search: `page=${page}` });
+    history.push({ ...location, search: `query=${moviesQuery}&page=${page}` });
   };
 
   return (
