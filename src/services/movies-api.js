@@ -8,13 +8,15 @@ async function fetchMovies(url = '', config = {}) {
     : Promise.reject(new Error('Not found'));
 }
 
-export function fetchTrendingMovies() {
-  return fetchMovies(`${BASE_URL}/trending/all/day?api_key=${KEY}`);
+export function fetchTrendingMovies(page) {
+  return fetchMovies(
+    `${BASE_URL}/trending/all/day?api_key=${KEY}&page=${page}`,
+  );
 }
 
-export function fetchSearchMovies(query) {
+export function fetchSearchMovies(query, page) {
   return fetchMovies(
-    `${BASE_URL}/search/movie?api_key=${KEY}&language=en-US&query=${query}&page=1&include_adult=false`,
+    `${BASE_URL}/search/movie?api_key=${KEY}&language=en-US&query=${query}&page=${page}&include_adult=false`,
   );
 }
 
