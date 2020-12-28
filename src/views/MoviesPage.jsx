@@ -11,7 +11,7 @@ import UseSessionStorage from '../hooks/useSessionStorage';
 export default function MoviesPage() {
   const [results, setResults] = UseSessionStorage('results', []);
   const [moviesQuery, setMoviesQuery] = useState('');
-  const [totalPage, setTotalPage] = useState(0);
+  const [totalPage, setTotalPage] = UseSessionStorage('totalPage', 0);
 
   const history = useHistory();
   const location = useLocation();
