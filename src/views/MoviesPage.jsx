@@ -39,7 +39,7 @@ export default function MoviesPage() {
         setTotalPage(total_pages);
       })
       .catch(error => console.log(error));
-  }, [moviesQuery, setResults, page]);
+  }, [moviesQuery, setResults, page, setTotalPage]);
 
   const handleFormSubmit = query => {
     setMoviesQuery(query);
