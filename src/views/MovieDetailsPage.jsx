@@ -74,7 +74,7 @@ function MovieDetailsPage() {
           </NavLink>
           <NavLink
             to={{
-              pathname: `${url}/cast`,
+              pathname: `${url}/reviews`,
               state: { from: location.state ? location.state.from : '/' },
             }}
           >
