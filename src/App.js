@@ -5,10 +5,6 @@ import { ToastContainer } from 'react-toastify';
 import Loader from 'react-loader-spinner';
 import AppBar from './components/AppBar';
 import Container from './components/Container';
-// import HomePage from './views/HomePage';
-// import MoviesPage from './views/MoviesPage';
-// import MovieDetailsPage from './views/MovieDetailsPage';
-// import NotFoundView from './views/NotFoundView';
 
 const HomePage = lazy(() => import('./views/HomePage'));
 const MoviesPage = lazy(() => import('./views/MoviesPage'));
@@ -21,7 +17,13 @@ export default function App() {
       <AppBar />
       <Suspense
         fallback={
-          <Loader type="Circles" color="#00BFFF" height={80} width={80} />
+          <Loader
+            type="Circles"
+            color="#00BFFF"
+            height={80}
+            width={80}
+            className="loader"
+          />
         }
       >
         <Switch>

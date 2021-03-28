@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import * as serviseApi from '../services/movies-api';
 import Cast from '../views/Cast';
 import Reviews from '../views/Reviews';
+import DEFAULT_IMAGE from '../images/imageNotFound.png';
 import s from './View.module.css';
 
 function MovieDetailsPage() {
@@ -41,14 +42,19 @@ function MovieDetailsPage() {
       <button type="button" className={s.button} onClick={handleGoBack}>
         Go to back
       </button>
-      {movie && (
+      {movie ? (
         <div>
-          <div className={s.imageBlockDetalies}>
-            <img
-              loading="lazy"
-              src={`${IMG_URL}${movie.poster_path}`}
-              alt={movie.title}
-            />
+          <div className={s.imageBlockDetails}>
+            {movie.poster_path ? (
+              <img
+                loading="lazy"
+                src={`${IMG_URL}${movie.poster_path}`}
+                alt={movie.title}
+              />
+            ) : (
+              <img src={DEFAULT_IMAGE} alt={movie.title} />
+            )}
+
             <div className={s.imageText}>
               <h2>{movie.title}</h2>
               <p>User Score {movie.vote_average * 10}%</p>
@@ -57,7 +63,9 @@ function MovieDetailsPage() {
               <ul className={s.genre}>
                 {movie.genres &&
                   movie.genres.map(genre => (
-                    <li key={genre.id}>{genre.name}</li>
+                    <li key={genre.id} className={s.genresItem}>
+                      {genre.name}
+                    </li>
                   ))}
               </ul>
             </div>
@@ -82,6 +90,8 @@ function MovieDetailsPage() {
           </NavLink>
           <hr />
         </div>
+      ) : (
+        <h1>Content not found</h1>
       )}
       <Route path={`${path}/cast`}>
         <Cast movieId={movieId} />

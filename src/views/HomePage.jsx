@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { useLocation, useHistory } from 'react-router-dom';
 import { Pagination } from '@material-ui/lab';
 import useStyles from '../services/stylesPagination';
-import * as serviseApi from '../services/movies-api';
+import * as serviceApi from '../services/movies-api';
 import MoviesList from '../components/MoviesList';
+import s from './View.module.css';
 
 export default function HomePage() {
   const [results, setResults] = useState([]);
@@ -17,11 +18,15 @@ export default function HomePage() {
   const page = new URLSearchParams(location.search).get('page') ?? 1;
 
   useEffect(() => {
-    serviseApi
+    serviceApi
       .fetchTrendingMovies(page)
       .then(({ results, total_pages }) => {
         setResults(results);
         setTotalPage(total_pages);
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
       })
       .catch(error => console.log(error));
   }, [page]);
@@ -36,8 +41,9 @@ export default function HomePage() {
 
       {totalPage > 1 && (
         <Pagination
-          className={classes.root}
+          className={s.pagination}
           count={totalPage}
+          shape="rounded"
           onChange={onHandlePage}
           page={Number(page)}
           showFirstButton
